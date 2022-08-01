@@ -7,8 +7,21 @@ public class GameplayController : MonoBehaviour {
 
     [HideInInspector] public bool gamePlaying;
 
+    [SerializeField] private GameObject tile;
+
+    private Vector3 currentTilePosition;                     //store loc of curr spawn new tile
+
     private void Awake() {
         Singleton();
+        /*        currentTilePosition = new Vector3(-2, 0, 3);*/
+    }
+
+    private void Start() {
+        currentTilePosition = new Vector3(-2, 0, 2);
+
+        for (int i = 0; i < 20; ++i) {
+            CreateTiles();
+        }
 
     }
 
@@ -20,6 +33,36 @@ public class GameplayController : MonoBehaviour {
     void Singleton() {
         if (instance == null)
             instance = this;
+
+    }
+
+    public void ActivateTileSpawner() {
+        StartCoroutine(SpawnNewTiles());
+
+    }
+
+    void CreateTiles() {
+        Vector3 newTilePosition = currentTilePosition;
+        int rand = Random.Range(0, 100);
+
+        if (rand < 50) {
+            newTilePosition.x -= 1f;
+        } else {
+            newTilePosition.z += 1f;
+        }
+
+        currentTilePosition = newTilePosition;
+        Instantiate(tile, currentTilePosition, Quaternion.identity);
+
+    }
+
+    IEnumerator SpawnNewTiles() {
+        yield return new WaitForSeconds(0.3f);
+
+        CreateTiles();
+
+        /*        if (gamePlaying)
+                    StartCoroutine(SpawnNewTiles());*/
 
     }
 
