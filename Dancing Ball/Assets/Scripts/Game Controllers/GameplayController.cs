@@ -55,7 +55,7 @@ public class GameplayController : MonoBehaviour {
         }
 
         currentTilePosition = newTilePosition;
-        Instantiate(tile, currentTilePosition, Quaternion.identity);
+        Instantiate(tile, currentTilePosition, transform.rotation);
 
     }
 

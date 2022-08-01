@@ -9,7 +9,7 @@ public class GemScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider target) {
         if (target.tag == "Ball") {
-            Instantiate(sparkleEffect, transform.position, Quaternion.identity);
+            Instantiate(sparkleEffect, transform.position, transform.rotation);
             GameplayController.instance.PlayCollectibeSound();
             gameObject.SetActive(false);
 
