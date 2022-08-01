@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour {
         if (ballTarget) {
             Vector3 newPosition = ballTarget.position;      //Curr pos
             Vector3 delta = oldPosition - newPosition;
-            delta.y = 0f;                                   // cam heght const.
+            delta.y = 0f;                                   // cam height const.
             transform.position -= delta;
             oldPosition = newPosition;
 

@@ -18,6 +18,8 @@ public class BallScript : MonoBehaviour {
 
     private void Update() {
         CheckInput();
+        CheckBallOutOfBounds();
+
     }
 
     private void FixedUpdate() {
@@ -32,6 +34,15 @@ public class BallScript : MonoBehaviour {
 
         }
 
+    }
+
+    void CheckBallOutOfBounds() {
+        if (GameplayController.instance.gamePlaying) {
+            if (transform.position.y < -4) {
+                GameplayController.instance.gamePlaying = false;
+                Destroy(gameObject);
+            }
+        }
     }
 
     void CheckInput() {

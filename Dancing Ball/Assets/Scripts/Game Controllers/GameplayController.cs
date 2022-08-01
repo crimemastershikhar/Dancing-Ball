@@ -11,7 +11,10 @@ public class GameplayController : MonoBehaviour {
 
     private Vector3 currentTilePosition;                     //store loc of curr spawn new tile
 
+    private AudioSource audioSource;
+
     private void Awake() {
+        audioSource = GetComponent<AudioSource>();
         Singleton();
         /*        currentTilePosition = new Vector3(-2, 0, 3);*/
     }
@@ -19,7 +22,7 @@ public class GameplayController : MonoBehaviour {
     private void Start() {
         currentTilePosition = new Vector3(-2, 0, 2);
 
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 5; ++i) {
             CreateTiles();
         }
 
@@ -61,9 +64,13 @@ public class GameplayController : MonoBehaviour {
 
         CreateTiles();
 
-        /*        if (gamePlaying)
-                    StartCoroutine(SpawnNewTiles());*/
+        if (gamePlaying)
+            StartCoroutine(SpawnNewTiles());
 
+    }
+
+    public void PlayCollectibeSound() {
+        audioSource.Play();
     }
 
 
