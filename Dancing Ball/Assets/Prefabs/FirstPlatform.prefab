@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7f380c617172a4fb0185a09bcce7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gem: {fileID: 0}
 --- !u!82 &4380047344860437604
 AudioSource:
   m_ObjectHideFlags: 0

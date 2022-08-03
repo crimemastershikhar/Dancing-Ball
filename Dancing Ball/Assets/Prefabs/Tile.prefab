@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3858826339324156766}
   m_Layer: 0
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7f380c617172a4fb0185a09bcce7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gem: {fileID: 8969545076739214212, guid: f11133908ce05114c93f29946ac14e24, type: 3}
+  chanceForCollectible: 0.25
 --- !u!82 &3858826339324156766
 AudioSource:
   m_ObjectHideFlags: 0

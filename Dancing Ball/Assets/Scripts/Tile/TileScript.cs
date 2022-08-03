@@ -6,10 +6,21 @@ public class TileScript : MonoBehaviour {
     private AudioSource audioSource;
     private Rigidbody myBody;
 
+    [SerializeField] private GameObject gem;
+    [SerializeField] private float chanceForCollectible;
 
     private void Awake() {
         myBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+    }
+
+    private void Start() {
+        if (Random.value < chanceForCollectible) {
+            Vector3 temp = transform.position;
+            temp.y += 2f;
+            Instantiate(gem, temp, transform.rotation);
+        }
 
     }
 
