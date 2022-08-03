@@ -41,12 +41,14 @@ public class BallScript : MonoBehaviour {
             if (transform.position.y < -4) {
                 GameplayController.instance.gamePlaying = false;
                 Destroy(gameObject);
+                GameplayController.instance.Restart();
             }
         }
     }
 
+
     void CheckInput() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0) {
             if (!GameplayController.instance.gamePlaying) {
                 GameplayController.instance.gamePlaying = true;
                 GameplayController.instance.ActivateTileSpawner();

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameplayController : MonoBehaviour {
     public static GameplayController instance;
@@ -38,15 +40,6 @@ public class GameplayController : MonoBehaviour {
         mainCamera = Camera.main;
         cameraColor = mainCamera.backgroundColor;
 
-    }
-
-    private void Start() {
-        currentTilePosition = new Vector3(-2, 0, 2);
-
-        for (int i = 0; i < 5; ++i) {
-            CreateTiles();
-        }
-
         tileTrueColor = tileMat.color;
         tileColor_Index = 0;
         tileColor_Day = new Color[3];
@@ -59,7 +52,20 @@ public class GameplayController : MonoBehaviour {
 
     }
 
+    private void Start() {
+        currentTilePosition = new Vector3(-2, 0, 2);
+
+        for (int i = 0; i < 15; ++i) {
+            CreateTiles();
+        }
+
+    }
+
     private void Update() {
+        /*        if (gamePlaying) {
+                    CheckLerpTimer();
+                }*/
+
         CheckLerpTimer();
     }
 
@@ -97,11 +103,13 @@ public class GameplayController : MonoBehaviour {
             if (direction == 1) {
                 mainCamera.backgroundColor = Color.Lerp(cameraColor, Color.black, percent);
                 tileMat.color = Color.Lerp(tileColor_Day[tileColor_Index], tileColor_Night, percent);
-                dayLight.intensity = 1f - percent;
+                Debug.Log(nameof(tileMat.color));
+                dayLight.intensity = .5f - percent;
             } else {
                 mainCamera.backgroundColor = Color.Lerp(Color.black, cameraColor, percent);
                 tileMat.color = Color.Lerp(tileColor_Night, tileColor_Day[tileColor_Index], percent);
                 dayLight.intensity = percent;
+                Debug.Log(nameof(tileMat.color));
             }
 
             if (percent > 0.98) {
@@ -146,6 +154,11 @@ public class GameplayController : MonoBehaviour {
 
     public void PlayCollectibeSound() {
         audioSource.Play();
+    }
+
+    public void Restart() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
 
