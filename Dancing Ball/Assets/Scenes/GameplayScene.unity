@@ -350,7 +350,10 @@ MonoBehaviour:
   pools:
   - tag: Tile
     prefab: {fileID: 3417883456288176331, guid: f3fd05f10212b374290c8cd748abe886, type: 3}
-    size: 18
+    size: 30
+  - tag: Gem
+    prefab: {fileID: 8969545076739214212, guid: f11133908ce05114c93f29946ac14e24, type: 3}
+    size: 10
 --- !u!4 &1125467172
 Transform:
   m_ObjectHideFlags: 0
