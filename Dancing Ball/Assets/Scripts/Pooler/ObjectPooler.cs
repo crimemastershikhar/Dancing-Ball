@@ -13,11 +13,56 @@ public class ObjectPooler : MonoBehaviour {
         public int size;
     }
 
+    #region Singleton
+
+    public static ObjectPooler Instance;
+
+    private void Awake() {
+        Instance = this;
+    }
+
+    #endregion
+
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+    private void Start() {
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
+        foreach (Pool pool in pools) {
+            Queue<GameObject> objectPool = new Queue<GameObject>();
 
+            //Creating each obj till size
+            for (int i = 0; i < pool.size; ++i) {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+
+            }
+            //Adding in the dictionary
+            poolDictionary.Add(pool.tag, objectPool);
+
+        }
+
+    }
+
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) {
+
+        if (!poolDictionary.ContainsKey(tag)) {
+            Debug.LogWarning("pool with  " + tag + " doesnt exist");
+            return null;
+        }
+
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
+
+        //Adding back to be reused
+        poolDictionary[tag].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
+    }
 
 
 

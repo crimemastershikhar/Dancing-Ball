@@ -9,7 +9,7 @@ public class GameplayController : MonoBehaviour {
 
     [HideInInspector] public bool gamePlaying;
 
-    [SerializeField] private GameObject tile;
+    /*    [SerializeField] private GameObject tile;*/
 
     private Vector3 currentTilePosition;                     //store loc of curr spawn new tile
 
@@ -87,6 +87,8 @@ public class GameplayController : MonoBehaviour {
 
     }
 
+    #region SettingMoodLight
+
     void CheckLerpTimer() {
         timer += Time.deltaTime;
 
@@ -127,6 +129,8 @@ public class GameplayController : MonoBehaviour {
 
     }
 
+    #endregion
+
     void CreateTiles() {
         Vector3 newTilePosition = currentTilePosition;
         int rand = Random.Range(0, 100);
@@ -138,12 +142,15 @@ public class GameplayController : MonoBehaviour {
         }
 
         currentTilePosition = newTilePosition;
-        Instantiate(tile, currentTilePosition, transform.rotation);
+
+        ObjectPooler.Instance.SpawnFromPool("Tile", currentTilePosition, Quaternion.identity);
+
+        /*        Instantiate(tile, currentTilePosition, transform.rotation);*/
 
     }
 
     IEnumerator SpawnNewTiles() {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
 
         CreateTiles();
 

@@ -34,7 +34,6 @@ public class TileScript : MonoBehaviour {
     //to de-ctivate gameObject
     IEnumerator TurnOffGameObject() {
         yield return new WaitForSeconds(2f);
-        gameObject.SetActive(false);
 
     }
 
